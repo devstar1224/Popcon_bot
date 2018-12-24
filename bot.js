@@ -1,16 +1,18 @@
 /*
 @ Autor devstar1224
 */
-
+var fs = require('fs');
 var Discord = require('discord.js')
 var bot = new Discord.Client()
 const DBL = require("dblapi.js");
-const dbl = new DBL('', bot); // setting https://discordbots.org/servers token
+let path = 'storage/public_settings.json';
+let public = JSON.parse(fs.readFileSync(path, 'utf8')); //set json settings file
 
 // You can setting here to
-const prefix = '>'; // Setting prefix
-const ownerID = ''; // Setting ownerID
-const token = ''; //setting bot token
+const prefix = ' '; // Setting prefix
+const ownerID = ' '; // Setting ownerID
+const token = ' '; //setting bot token
+const dbl = new DBL(' ', bot);
 // here
 
 const active = new Map();
@@ -20,7 +22,7 @@ bot.on('message', message =>{
 
 	if(message.author.bot) return;
 	if(!message.content.startsWith(prefix)) return;
-
+	set();
 //command handler
  	try {
 		// auto reload (options)
@@ -51,3 +53,8 @@ dbl.on('posted', () => {
 dbl.on('error', e => {
  console.log(`Oops! ${e}`);
 })
+
+
+function set() {
+		bot.user.setActivity(public['activity'].text);
+}
