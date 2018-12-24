@@ -3,7 +3,7 @@
 @ 1.0.2 ver
 insert bot token and (option site token), setting prefix and owner ID
 Will be modify this README file
-```html
+
     <style>
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
     </style>
@@ -11,4 +11,3 @@ Will be modify this README file
     <div class="container">
       test
     </div>
-```
