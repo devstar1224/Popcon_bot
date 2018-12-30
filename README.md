@@ -129,11 +129,11 @@ UNLOCK TABLES;
 > V.1.0.2
   * First upload github
   * Over 42 Server use
-> V.1.1.0 <= Now(25/12/2018 00:27 KST)
+> V.1.1.0 <= Now(30/12/2018 13:03 KST)
   * New function setdj
   * fix bugs
   * New database MYSQL!
-  * Over 48 Server use
+  * Over 150 Server use
 ***
 ## Future
 > We are programming now
