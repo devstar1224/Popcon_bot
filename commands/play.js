@@ -3,7 +3,7 @@
 */
 const ytdl = require('ytdl-core');
 
-exports.run = async (bot, message, args, ops, cmd, prefix, connection) => {
+exports.run = async (bot, message, args, ops, cmd, prefix) => {
 
     if (!message.member.voiceChannel) return message.channel.send('음성 채널에 접속해주세요.');
 

@@ -1,5 +1,5 @@
 var config = {
-  host : "localhost",
+  host : "",
   port : ,
   user : "",
   password : "",

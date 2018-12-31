@@ -1,8 +1,11 @@
 /*
 @ Autor devstar1224
 */
+let db_config = require('../db_config.js')
+let mysql = require('mysql');
+let connection = mysql.createConnection(db_config);
 
-exports.run = async (bot, message, args, ops, cmd, prefix, connection) => {
+exports.run = async (bot, message, args, ops, cmd, prefix) => {
   try {
 
 let server_id = message.guild.id;

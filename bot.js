@@ -5,20 +5,19 @@ var fs = require('fs');
 var Discord = require('discord.js')
 var bot = new Discord.Client()
 const DBL = require("dblapi.js");
-const db_config = require('./db_config.js')
-var mysql = require('mysql');
+let db_config = require('./db_config.js')
+let mysql = require('mysql');
+let connection = mysql.createConnection(db_config);
 
 // You can setting here to
 const prefix = ''; // Setting prefix
 const ownerID = ''; // Setting ownerID
 const token = ''; //setting bot token
 const dbl = new DBL('', bot);
-const connection = mysql.createConnection(db_config);
 // here
 
 const active = new Map();
 	bot.on('message', message =>{
-	bot.on('error',(error) => { console.log('bot.js = '+ error); });
 	let args = message.content.slice(prefix.length).trim().split(' ');
 	let cmd = args.shift().toLowerCase();
 
@@ -26,10 +25,10 @@ const active = new Map();
 	if(!message.content.startsWith(prefix)) return;
 //command handler
  	try {
-		set(connection);
+		set();
 		// auto reload (options)
 		// delete require.cache[require.resolve(`./commands/${cmd}.js`)];
-		console.log('command: ' + cmd +  args);
+		console.log(`${message.guild.id} command: ${cmd} ${args}`);
 		let ops = {
 			ownerID: ownerID,
 			active: active
@@ -38,11 +37,12 @@ const active = new Map();
 
 		// let commandFile = require(`./commands/${cmd}.js`);
 		let commandFile = require(`./command.js`);
-		commandFile.run(bot, message, args, ops, prefix, cmd, connection);
+		commandFile.run(bot, message, args, ops, prefix, cmd);
 
  	} catch (e) {
- 			console.log(e.stack);
+ 			console.log(e);
  	}
+	bot.on('error', console.error);
 });
 
 //login using auth
@@ -58,7 +58,7 @@ dbl.on('error', e => {
 })
 
 
-function set(connection) {
+function set() {
 	try {
 	sql =`SELECT * FROM server_public_settings;`;
 	connection.query(sql, function(error, result, fields) {

@@ -2,8 +2,11 @@
 @ Autor devstar1224
 */
 var fs = require('fs');
+let db_config = require('../db_config.js')
+let mysql = require('mysql');
+let connection = mysql.createConnection(db_config);
 
-exports.run = async (bot, message, args, ops, cmd, prefix, connection) => {
+exports.run = async (bot, message, args, ops, cmd, prefix) => {
 try {
   let server_id = message.guild.id;
   let fetched = ops.active.get(message.guild.id);
@@ -73,6 +76,6 @@ try {
   }
 
 } catch (e) {
-   message.channel.send(e);
+   console.log(e);
 }
 }

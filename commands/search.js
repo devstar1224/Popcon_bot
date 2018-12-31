@@ -4,8 +4,7 @@
 
 const search = require('yt-search');
 
-exports.run = (bot, message, args, ops, cmd, prefix, connection) => {
-  console.log(args);
+exports.run = (bot, message, args, ops, cmd, prefix) => {
   search(`${args}`, function(err, res) {
     if (err) return message.channel.send('오류발생.');
     let videos = res.videos.slice(0, 10);
@@ -31,6 +30,7 @@ exports.run = (bot, message, args, ops, cmd, prefix, connection) => {
 
     collector.videos = videos;
     collector.on('collect', function(m){
+    console.log(`${message.guild.id} result: select music finish`);
     if (m.content == 'c') {
       return message.channel.send({embed: { // when time out
       author: {

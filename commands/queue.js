@@ -2,7 +2,7 @@
 @ Autor devstar1224
 */
 
-exports.run = async (bot, message, args, ops, cmd, prefix, connection) => {
+exports.run = async (bot, message, args, ops, cmd, prefix) => {
 
   let fetched = ops.active.get(message.guild.id);
 

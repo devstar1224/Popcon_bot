@@ -102,7 +102,7 @@ command_array.push(commands);
 
 //here
 
-exports.run = async (bot, message, args, ops, prefix, cmd, connection) => {
+exports.run = async (bot, message, args, ops, prefix, cmd) => {
   try {
     for (var i = 0; i < command_array.length; i++) {
       if (command_array[i].command == cmd && cmd == "help") {
@@ -111,7 +111,7 @@ exports.run = async (bot, message, args, ops, prefix, cmd, connection) => {
         break;
       }else if (command_array[i].command == cmd) {
       let commandFile = require(`./commands/`+ command_array[i].filename);
-      commandFile.run(bot, message, args, ops, cmd, prefix, connection);
+      commandFile.run(bot, message, args, ops, cmd, prefix);
       break;
       }
     }
