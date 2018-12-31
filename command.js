@@ -94,15 +94,15 @@ command_array.push(commands);
 
 var commands = {
 command : "setdj",
-howto : "[유저의 고유아이디]",
-help : "봇의 DJ로 임명하는 기능입니다. 개발자모드로 변경후 해당하는 아이디의 오른쪽 클릭후 ID복사를 하면 됩니다. / 서버관리자전용 ",
+howto : "[태그]",
+help : "봇의 DJ로 임명하는 기능입니다. `@별명` 으로 태그합니다. / 서버관리자전용 ",
 filename : "setdj.js"
 };
 command_array.push(commands);
 
 //here
 
-exports.run = async (bot, message, args, ops, prefix, cmd) => {
+exports.run = async (bot, message, args, ops, prefix, cmd, connection) => {
   try {
     for (var i = 0; i < command_array.length; i++) {
       if (command_array[i].command == cmd && cmd == "help") {
@@ -111,7 +111,7 @@ exports.run = async (bot, message, args, ops, prefix, cmd) => {
         break;
       }else if (command_array[i].command == cmd) {
       let commandFile = require(`./commands/`+ command_array[i].filename);
-      commandFile.run(bot, message, args, ops, cmd, prefix);
+      commandFile.run(bot, message, args, ops, cmd, prefix, connection);
       break;
       }
     }

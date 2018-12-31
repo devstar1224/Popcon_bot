@@ -1,23 +1,13 @@
 /*
 @ Autor devstar1224
 */
-var mysql = require('mysql')
 
-var connection = mysql.createConnection({
-    host : "localhost",
-    port :  ,
-    user : " ",
-    password : " ",
-    database : " "
-})
-connection.connect();
-
-exports.run = async (bot, message, args, ops, cmd, prefix) => {
+exports.run = async (bot, message, args, ops, cmd, prefix, connection) => {
   try {
 
 let server_id = message.guild.id;
 
-let sql =`SELECT permission FROM server_user_permission WHERE server_id=${server_id} AND permission = 'setdj' AND user_id = '${args[0]}'`;
+let sql =`SELECT permission FROM server_user_permission WHERE server_id=${server_id} AND permission = 'setdj' AND user_id = '${args[0]}';`;
 if (message.guild.ownerID == message.author.id) {
     connection.query(sql,function(error, result, fields) {
           if (error) {
@@ -37,6 +27,7 @@ if (message.guild.ownerID == message.author.id) {
               }
             }
         });
+
   }else{
       message.reply('서버 관리자만 사용할 수 있는 명령어 입니다. 관리자에게 문의해주세요.');
   }

@@ -26,12 +26,8 @@ const ownerID = ' '; // Setting ownerID
 const token = ' '; //setting bot token
 const dbl = new DBL(' ', bot);
 ```
-#### volume.js, skipadmin.js, setdj.js
-> near 7 line (will be make mysql config js file)
-contain sql if you modify sql search
-```javascript
- let sql =
-```
+#### db_config.js
+> edit here
 
 ```javascript
 var connection = mysql.createConnection({
@@ -40,7 +36,7 @@ var connection = mysql.createConnection({
     user : " ", // id
     password : " ", // password
     database : " " // database name
-})
+});
 ```
 
 #### MYSQL exports sql
@@ -65,6 +61,29 @@ USE `discord_bot`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `server_public_settings`
+--
+
+DROP TABLE IF EXISTS `server_public_settings`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+ SET character_set_client = utf8mb4 ;
+CREATE TABLE `server_public_settings` (
+  `index` int(11) NOT NULL,
+  `activity` longtext,
+  PRIMARY KEY (`index`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `server_public_settings`
+--
+
+LOCK TABLES `server_public_settings` WRITE;
+/*!40000 ALTER TABLE `server_public_settings` DISABLE KEYS */;
+/*!40000 ALTER TABLE `server_public_settings` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `server_settings`
 --
 
@@ -72,7 +91,7 @@ DROP TABLE IF EXISTS `server_settings`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `server_settings` (
-  `server_id` int(255) NOT NULL,
+  `server_id` bigint(20) NOT NULL,
   `volume` int(100) DEFAULT NULL,
   PRIMARY KEY (`server_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
@@ -96,7 +115,7 @@ DROP TABLE IF EXISTS `server_user_permission`;
  SET character_set_client = utf8mb4 ;
 CREATE TABLE `server_user_permission` (
   `index` int(100) NOT NULL AUTO_INCREMENT,
-  `server_id` longtext,
+  `server_id` bigint(20) DEFAULT NULL,
   `user_id` longtext,
   `permission` longtext,
   PRIMARY KEY (`index`)
@@ -121,7 +140,8 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2018-12-25  0:40:06
+-- Dump completed on 2018-12-31 18:31:28
+
 
 ```
 ***
@@ -129,17 +149,19 @@ UNLOCK TABLES;
 > V.1.0.2
   * First upload github
   * Over 42 Server use
-> V.1.1.0 <= Now(30/12/2018 13:03 KST)
+> V.1.1.0
   * New function setdj
   * fix bugs
   * New database MYSQL!
   * Over 150 Server use
+> V.1.1.1 <= Now(31/12/2018 18:27 KST)
+  * Modify use to setdj
+  * fix bugs
+  * Over 217 Server use
 ***
 ## Future
 > We are programming now
-  * Add user custom permission
-    * Volume control permission
-    * Force music skip permission
+  * Add user custom dj permission delete
   * Add select global language
     * Korean
     * English

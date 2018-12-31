@@ -2,26 +2,16 @@
 @ Autor devstar1224
 */
 var fs = require('fs');
-var mysql = require('mysql')
 
-var connection = mysql.createConnection({
-    host : "localhost",
-    port :  ,
-    user : " ",
-    password : " ",
-    database : " "
-})
-connection.connect();
-
-exports.run = (bot, message, args, ops, cmd, prefix) => {
+exports.run = async (bot, message, args, ops, cmd, prefix, connection) => {
 try {
   let server_id = message.guild.id;
   let fetched = ops.active.get(message.guild.id);
   let sql;
-
+  let author_id = `<@!${message.author.id}>`;
   if (cmd) { // if user requset is commands but from to play.js cmd value is 0, so don't send under the messages.
 
-  sql =`SELECT * FROM server_user_permission WHERE server_id=${server_id} AND permission = 'setdj' AND user_id = '${message.author.id}'`;
+  sql =`SELECT * FROM server_user_permission WHERE server_id=${server_id} AND permission = 'setdj' AND user_id = '${author_id}'`;
       connection.query(sql,function(error, result, fields) {
             if (error) {
               console.log(error);

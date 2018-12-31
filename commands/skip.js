@@ -2,7 +2,7 @@
 @ Autor devstar1224
 */
 
-exports.run = async (bot, message, args, ops, cmd, prefix) => {
+exports.run = async (bot, message, args, ops, cmd, prefix, connection) => {
   let fetched = ops.active.get(message.guild.id);
   if (!fetched) return message.channel.send('음악이 재생되고 있지 않습니다.');
 

@@ -2,9 +2,8 @@
 @ Autor devstar1224
 */
 const ytdl = require('ytdl-core');
-const urlencode = require('urlencode');
 
-exports.run = async (bot, message, args, ops) => {
+exports.run = async (bot, message, args, ops, cmd, prefix) => {
 
     if (!message.member.voiceChannel) return message.channel.send('음성 채널에 접속해주세요.');
 
@@ -16,10 +15,9 @@ exports.run = async (bot, message, args, ops) => {
     // IF YOU REMOVE DEBUGING URL
     // message.channel.send(args + '|' + validate);
 
-
     if (!(validate != -1)) {
       let commandFile = require('./search.js');
-      return commandFile.run(bot, message, urlencode(args), ops);
+      return commandFile.run(bot, message, args, ops, cmd, prefix);
     }
 
     // youtube url + video ID
@@ -43,10 +41,13 @@ exports.run = async (bot, message, args, ops) => {
         message.channel.send(`대기열추가 : ${info.title} | 요청 : ${message.author.id}`)
     }
     ops.active.set(message.guild.id, data);
+
+    // it is commit from to json file .. AUTO SETTING VOLUME
+    let commandFile = require('./volume.js');
+    commandFile.run(bot, message, args, ops, 0);
 }
 
 async function play(bot, ops, data){
-
     bot.channels.get(data.queue[0].announceChannel).send(`현재 재생곡: ${data.queue[0].songTitle} | 요청 : ${data.queue[0].requester}`);
 
     data.dispatcher = await data.connection.playStream(ytdl(data.queue[0].url, {filter: 'audioonly'}));
@@ -56,7 +57,6 @@ async function play(bot, ops, data){
         });
 }
 function end(bot, ops, dispatcher){
-
     let fetched = ops.active.get(dispatcher.guildID);
 
     fetched.queue.shift();
@@ -72,5 +72,4 @@ function end(bot, ops, dispatcher){
         if (vc) vc.leave();
 
     }
-
 }

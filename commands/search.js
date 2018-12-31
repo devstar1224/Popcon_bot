@@ -4,7 +4,7 @@
 
 const search = require('yt-search');
 
-exports.run = (bot, message, args, ops, cmd, prefix) => {
+exports.run = (bot, message, args, ops, cmd, prefix, connection) => {
   console.log(args);
   search(`${args}`, function(err, res) {
     if (err) return message.channel.send('오류발생.');
